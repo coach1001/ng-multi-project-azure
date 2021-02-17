@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: NodeTool@0
+  enabled: false
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
@@ -19,9 +20,11 @@ steps:
     npm install -g @angular/cli
     npm install
     ng build --prod
+  enabled: false  
   displayName: 'npm install and build'
 
 - task: YarnInstaller@3
+  enabled: false
   inputs:
     versionSpec: '1.x'
     
