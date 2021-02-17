@@ -11,10 +11,18 @@ pool:
 
 steps:
 - task: NodeTool@0
-  enabled: false
+  enabled: true
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
+- script: |
+    node build.js
+  enabled: false  
+  displayName: 'Set environment variables'
+
+- bash: |
+    echo "my environment variable is $TEMP"
 
 - script: |
     npm install -g @angular/cli
@@ -29,6 +37,7 @@ steps:
     versionSpec: '1.x'
     
 - task: UseGitVersion@5
+  enabled: false
   inputs:
     versionSpec: '5.x'
     useConfigFile: true
