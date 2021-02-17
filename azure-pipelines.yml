@@ -20,7 +20,7 @@ steps:
 #    echo "##vso[task.setvariable variable=sauce]crushed tomatoes"
 #  displayName: 'Set environment variables'
 
-- bash: |
+- script: |
     node build.js
   displayName: 'Set environment variables'
 
