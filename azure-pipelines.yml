@@ -16,8 +16,8 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    node build.js
+- bash: |
+    echo "##vso[task.setvariable variable=sauce]crushed tomatoes"
   displayName: 'Set environment variables'
 
 - bash: |
