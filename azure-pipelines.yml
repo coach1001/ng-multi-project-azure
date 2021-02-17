@@ -21,7 +21,7 @@ steps:
   displayName: 'Set environment variables'
 
 - bash: |
-    echo my pipeline variable is $(sauce)
+    echo "my environment variable is $SAUCE"
   displayName: 'Echo set environment variables'
 
 - script: |
