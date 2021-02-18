@@ -38,6 +38,6 @@ steps:
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
 #- script: echo $(NG_PROJECTS)
 - ${{ each value in parameters.ngProjects }}:
-  - ${{ if contains(NG_PROJECTS, value.project) }}:
+  - ${{ if contains(variables['NG_PROJECTS'], value.project) }}:
     - script: echo ${{ value.project }}
       displayName: 'Building Project - ${{ value.project }}'
