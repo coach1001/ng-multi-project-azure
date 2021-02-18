@@ -11,7 +11,7 @@ parameters:
       build: true
       test: true
       publishTestResults: true
-      deployToOcto: true,
+      deployToOcto: true
     - project: 'project-b'
       build: true
       test: false
@@ -34,5 +34,6 @@ steps:
     ${{ each value in parameters.ngProjects }}:
       ${{ format('NG_PROJECT_{0}', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
+- script: echo $(COMMIT_MESSAGE_NG_PROJECTS)
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}

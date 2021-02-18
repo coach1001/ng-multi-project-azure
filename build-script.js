@@ -3,7 +3,6 @@ let pipelineNgProjects = [];
 let commitMessageNgProjects = [];
 const commitMessage = process.env.BUILD_COMMIT_MESSAGE;
 Object.keys(process.env).forEach(k => {
-  console.log(`##[debug]ENV_VAR=${k}`);
   if(k.startsWith('NG_PROJECT_')) {
     pipelineNgProjects.push(process.env[k]);
   }
@@ -18,7 +17,7 @@ if(temp.length > 1) {
 console.log(`##[debug]BUILD_COMMIT_MESSAGE=${commitMessage}`);
 console.log(`##[debug]PIPELINE_NG_PROJECTS=${JSON.stringify(pipelineNgProjects)}`);
 console.log(`##[debug]COMMIT_MESSAGE_NG_PROJECTS=${JSON.stringify(commitMessageNgProjects)}`);
-
+console.log(`##vso[task.setvariable variable=COMMIT_MESSAGE_NG_PROJECTS]${commitMessageNgProjects}`);
 //console.log(`##[debug]BUILD_COMMIT_MESSAGE=${process.env.BUILD_COMMIT_MESSAGE}`);
 /*const fs = require('fs');
 const commitMessage = 'Test ##project-a##';
