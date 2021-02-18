@@ -1,5 +1,5 @@
 'use strict';
-const fs = require('fs');
+/*const fs = require('fs');
 const commitMessage = 'Test ##project-a##';
 // const commitMessage = 'Test';
 let runProjects = commitMessage.split('##');
@@ -22,8 +22,4 @@ if(runProjects.length > 1) {
 } 
 
 console.log(buildProjects);
-
-
-
-
-console.log(`echo ##vso[task.setvariable variable=sauce]crushed tomatoes`);
+console.log(`echo ##vso[task.setvariable variable=sauce]crushed tomatoes`);*/
