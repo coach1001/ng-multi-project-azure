@@ -6,7 +6,6 @@
 parameters:
 - name: myNumber
   type: number
-  default: 2
   values:
   - 1
   - 2
