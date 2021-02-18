@@ -4,17 +4,17 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-  - ngProjects: ['project-a', 'project-b']
+  - ngProjects: ["project-a", "project-b"]
     
 trigger:
 - main
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: "Ubuntu 16.04"
 
 steps:
-  - bash: |
-    echo ${{ parameters.ngProjects }}
+  #- bash: |
+  #  echo ${{ parameters.ngProjects }}
   - ${{ each project in parameters.ngProjects }}:
     - bash: |
       echo ${{ project }}
