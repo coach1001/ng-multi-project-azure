@@ -17,13 +17,13 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-- task: NodeTool@0
-    inputs:
-    versionSpec: '10.x'
-    displayName: 'Install Node.js'
-- script: |
-    node build-script.js
-  env:
-    ngProjects: ${{ parameters.ngProjects }}
+# - task: NodeTool@0
+#     inputs:
+#     versionSpec: '10.x'
+#     displayName: 'Install Node.js'
+# - script: |
+#     node build-script.js
+#   env:
+#     ngProjects: ${{ parameters.ngProjects }}
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}
