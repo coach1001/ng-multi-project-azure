@@ -4,14 +4,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-- name: myNumber
-  type: number
+- name: NgProjects
+  type: object
   values:
-  - 1
-  - 2
-  - 4
-  - 8
-  - 16
+  - project-a
+  - project-b
 
 trigger:
 - main
@@ -19,6 +16,7 @@ trigger:
 pool:
   vmImage: 'Ubuntu 16.04'
 
-steps: 
-- ${{ each value in parameters.myNumber.values }}:
-  - script: echo ${{ value }} 
+steps:
+  - script: echo ${{ parameters }}
+- ${{ each project in parameters.NgProjects }}:
+  - script: echo ${{ project }} 
