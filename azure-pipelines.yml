@@ -4,11 +4,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-  ngProjects:
+- name: ngProjects
+  type: object
+  default:
   - project: 'project-a'
-    build: true
   - project: 'project-b'
-    build: false
 
 trigger:
 - main
@@ -17,13 +17,13 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-# - task: NodeTool@0
-#     inputs:
-#     versionSpec: '10.x'
-#     displayName: 'Install Node.js'
-# - script: |
-#     node build-script.js
-#   env:
-#     ngProjects: ${{ parameters.ngProjects }}
+- task: NodeTool@0
+    inputs:
+    versionSpec: '10.x'
+    displayName: 'Install Node.js'
+- script: |
+    node build-script.js
+  env:
+    ngProjects: ${{ parameters.ngProjects }}
 - ${{ each value in parameters.ngProjects }}:
-  - script: echo ${{ value.project }}
+  - script: echo ${{ value }}
