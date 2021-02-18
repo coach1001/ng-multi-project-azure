@@ -1,8 +1,24 @@
 'use strict';
+let pipelineNgProjects = [];
+let commitMessageNgProjects = [];
+const commitMessage = process.env.BUILD_COMMIT_MESSAGE;
 Object.keys(process.env).forEach(k => {
   console.log(`##[debug]ENV_VAR=${k}`);
+  if(k.startsWith('NG_PROJECT_')) {
+    pipelineNgProjects.push(process.env[k]);
+  }
 });
-//console.log(`##[debug]NG_PROJECTS=${process.env.NG_PROJECTS}`);
+let runProjects = commitMessage.split('##');
+let temp = commitMessage.split('##');
+if(temp.length > 1) {
+  temp = temp[1].split(',').map(v => v.trim());
+} else {
+  commitMessageNgProjects = pipelineNgProjects.join(',');
+}
+console.log(`##[debug]BUILD_COMMIT_MESSAGE=${commitMessage}`);
+console.log(`##[debug]PIPELINE_NG_PROJECTS=${JSON.stringify(pipelineNgProjects)}`);
+console.log(`##[debug]COMMIT_MESSAGE_NG_PROJECTS=${JSON.stringify(commitMessageNgProjects)}`);
+
 //console.log(`##[debug]BUILD_COMMIT_MESSAGE=${process.env.BUILD_COMMIT_MESSAGE}`);
 /*const fs = require('fs');
 const commitMessage = 'Test ##project-a##';
