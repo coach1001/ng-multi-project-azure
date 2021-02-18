@@ -25,5 +25,8 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.15.5'
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}
