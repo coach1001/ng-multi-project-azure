@@ -4,11 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-  - name: ng-projects
-    displayName: Angular Projects
-    type: string
-      - 'project-a'
-      - 'project-b'
+  - ngProjects: ['project-a', 'project-b']
     
 trigger:
 - main
@@ -18,7 +14,7 @@ pool:
 
 steps:
   - bash: |
-    echo ${{ parameters.ng-projects }}
-  - ${{ each project in parameters.ng-projects }}:
+    echo ${{ parameters.ngProjects }}
+  - ${{ each project in parameters.ngProjects }}:
     - bash: |
       echo ${{ project }}
