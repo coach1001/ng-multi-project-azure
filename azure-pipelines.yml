@@ -32,13 +32,12 @@ steps:
 - script: |
     node build-script.js
   displayName: 'Check Commit Message for Project Filter'
-  name: ProjectFilter
   env:
     ${{ each value in parameters.ngProjects }}:
       ${{ format('NG_PROJECT_{0}', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
-- script: echo 'Projects to be built - $(ProjectFilter.NG_PROJECTS)'
+# - script: echo 'Projects to be built - $(NG_PROJECTS)'
 - ${{ each value in parameters.ngProjects }}:
-  - ${{ if contains(variables['NG_PROJECTS'], value.project) }}:
+  - ${{ if contains($[variables.NG_PROJECTS], value.project) }}:
     - script: echo ${{ value.project }}
       displayName: 'Building Project - ${{ value.project }}'
