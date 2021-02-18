@@ -40,4 +40,7 @@ steps:
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}
     displayName: 'Building Project - ${{ value.project }}'
-    condition: contains(variables.NG_PROJECTS, '${{ value.project }}')
+    condition: contains(variables.NG_PROJECTS, '${{ value.project }}' && ${{ value.build }} )
+  - script: echo ${{ value.project }}
+    displayName: 'Test Project - ${{ value.project }}'
+    condition: contains(variables.NG_PROJECTS, '${{ value.project }}' && ${{ value.test }} )
