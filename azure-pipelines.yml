@@ -3,6 +3,13 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+parameters:
+  - name: ng-projects
+    displayName: Angular Projects
+    type: string
+      - "project-a"
+      - "project-b"
+    
 trigger:
 - main
 
@@ -10,46 +17,8 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-#- bash: |
-#    echo "##vso[task.setvariable variable=sauce]crushed tomatoes"
-#  displayName: 'Set environment variables'
-
-- script: |
-    node build.js
-    
-#  displayName: 'Set environment variables'
-
-#- bash: |
-#    echo "my environment variable is $SAUCE"
-#  displayName: 'Echo set environment variables'
-
-#- bash: |
-#    echo "##vso[task.setvariable variable=sauce]crushed tomatoes"
-
-# An environment variable called `SAUCE` has been added to all downstream steps
-- bash: |
-    echo $SAUCE
-
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  enabled: false  
-  displayName: 'npm install and build'
-
-- task: YarnInstaller@3
-  enabled: false
-  inputs:
-    versionSpec: '1.x'
-    
-- task: UseGitVersion@5
-  enabled: false
-  inputs:
-    versionSpec: '5.x'
-    useConfigFile: true
-    configFilePath: 'GitVersion.yml'
+  - bash: |
+    echo ${{ parameters.projects }}
+  - ${{ each project in parameters.projects }}:
+    - bash: |
+      echo ${{ project }}

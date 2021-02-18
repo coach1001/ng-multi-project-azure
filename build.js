@@ -1,1 +1,0 @@
-console.log(`echo ##vso[task.setvariable variable=sauce]crushed tomatoes`);
