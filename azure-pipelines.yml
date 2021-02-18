@@ -20,5 +20,5 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps: 
-- ${{ each value in parameters.myNumber }}:
+- ${{ each value in parameters.myNumber.values }}:
   - script: echo ${{ value }} 
