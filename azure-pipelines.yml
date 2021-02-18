@@ -7,8 +7,10 @@ parameters:
 - name: ngProjects
   type: object
   default:
-  - project: 'project-a'
-  - project: 'project-b'
+    - project: 'project-a'
+      build: true
+    - project: 'project-b'
+      build: true
 
 trigger:
 - main
@@ -26,4 +28,4 @@ steps:
   env:
     ngProjects: ${{ parameters.ngProjects }}
 - ${{ each value in parameters.ngProjects }}:
-  - script: echo ${{ value }}
+  - script: echo ${{ value.project }}
