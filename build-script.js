@@ -1,5 +1,6 @@
 'use strict';
-console.log(process.env.NG_PROJECTS, process.env.BUILD_COMMIT_MESSAGE);
+//console.log(process.env.NG_PROJECTS, process.env.BUILD_COMMIT_MESSAGE);
+console.log(`##[debug] ${process.env.NG_PROJECTS} ${process.env.BUILD_COMMIT_MESSAGE}`);
 /*const fs = require('fs');
 const commitMessage = 'Test ##project-a##';
 // const commitMessage = 'Test';
