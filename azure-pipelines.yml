@@ -11,7 +11,7 @@ parameters:
       build: true
       test: true
       publishTestResults: true
-      deployToOcto: true
+      deployToOcto: true,
     - project: 'project-b'
       build: true
       test: false
