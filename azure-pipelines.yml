@@ -32,7 +32,8 @@ steps:
     node build-script.js
   env:
     #NG_PROJECTS: ${{ join(';', parameters.ngProjects) }}
-    NG_PROJECTS: ${{ join(';', ${{ each value in parameters.ngProjects }}) }}
+    ${{ each value in parameters.ngProjects }}:
+      ${{ format('NG_PROJECT_', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}
