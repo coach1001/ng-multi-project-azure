@@ -7,8 +7,8 @@ parameters:
 - name: listOfStrings
   type: object
   default:
-  - one
-  - two
+  - one-a
+  - two-b
 
 trigger:
 - main
