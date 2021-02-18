@@ -7,8 +7,8 @@ parameters:
   - name: ng-projects
     displayName: Angular Projects
     type: string
-      - project-a
-      - project-b
+      - 'project-a'
+      - 'project-b'
     
 trigger:
 - main
@@ -19,6 +19,6 @@ pool:
 steps:
   - bash: |
     echo ${{ parameters.projects }}
-  - ${{ each project in parameters.projects }}:
+  - ${{ each project in parameters.ng-projects }}:
     - bash: |
       echo ${{ project }}
