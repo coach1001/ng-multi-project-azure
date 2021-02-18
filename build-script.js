@@ -19,4 +19,3 @@ console.log(`##[debug]BUILD_COMMIT_MESSAGE=${commitMessage}`);
 console.log(`##[debug]PIPELINE_NG_PROJECTS=${JSON.stringify(pipelineNgProjects)}`);
 console.log(`##[debug]COMMIT_MESSAGE_NG_PROJECTS=${JSON.stringify(commitMessageNgProjects)}`);
 console.log(`##vso[task.setvariable variable=NG_PROJECTS]${commitMessageNgProjects}`);
-//
