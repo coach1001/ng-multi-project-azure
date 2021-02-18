@@ -4,11 +4,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-- name: NgProjects
+- name: listOfStrings
   type: object
   default:
-  - project-a
-  - project-b
+  - one
+  - two
 
 trigger:
 - main
@@ -17,6 +17,5 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-  - script: echo ${{ parameters }}
-- ${{ each project in parameters.NgProjects }}:
-  - script: echo ${{ project }} 
+- ${{ each value in parameters.listOfStrings }}:
+  - script: echo ${{ value }}
