@@ -6,7 +6,7 @@
 parameters:
 - name: NgProjects
   type: object
-  values:
+  default:
   - project-a
   - project-b
 
