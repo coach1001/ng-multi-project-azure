@@ -29,6 +29,10 @@ steps:
   displayName: 'Install NodeJS'
   inputs:
     versionSpec: '14.15.5'
+- task: YarnInstaller@3
+  displayName: 'Install Yarn'
+  inputs:
+    versionSpec: '1.x'
 - script: |
     node build-script.js
   displayName: 'Check Commit Message for Project Filter'
@@ -36,11 +40,19 @@ steps:
     ${{ each value in parameters.ngProjects }}:
       ${{ format('NG_PROJECT_{0}', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
-# - script: echo 'Projects to be built - $(NG_PROJECTS)'
+- script: |
+    npm install -g @angular/cli
+  displayName: 'Install Angular CLI'
+- task: Yarn@3
+  displayName: Install Node Dependencies
+  inputs:
+    arguments: 'install'
 - ${{ each value in parameters.ngProjects }}:
-  - script: echo ${{ value.project }}
+  - script: |
+      ng build ${{ value.project }} --prod
     displayName: 'Building Project - ${{ value.project }}'
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }})
-  - script: echo ${{ value.project }}
+  - script: | 
+      ng test ${{ value.project }} --code-coverage
     displayName: 'Test Project - ${{ value.project }}'
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
