@@ -22,6 +22,7 @@ steps:
 
 - script: |
     node build.js
+    
 #  displayName: 'Set environment variables'
 
 #- bash: |
@@ -33,7 +34,7 @@ steps:
 
 # An environment variable called `SAUCE` has been added to all downstream steps
 - bash: |
-    echo "my environment variable is $SAUCE"
+    echo $SAUCE
 
 - script: |
     npm install -g @angular/cli

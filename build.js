@@ -1,1 +1,1 @@
-process.stdout.write('echo "##vso[task.setvariable variable=sauce]crushed tomatoes"');
+console.log(`echo "##vso[task.setvariable variable=sauce]crushed tomatoes"`);
