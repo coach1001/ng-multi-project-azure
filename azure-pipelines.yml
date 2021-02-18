@@ -30,8 +30,8 @@ steps:
     versionSpec: '14.15.5'
 - script: |
     node build-script.js
-    env:
-      NG_PROJECTS: ${{ parameters.ngProjects }}
-      BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
+  env:
+    NG_PROJECTS: ${{ parameters.ngProjects }}
+    BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
 - ${{ each value in parameters.ngProjects }}:
   - script: echo ${{ value.project }}
