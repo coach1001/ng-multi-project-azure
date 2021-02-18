@@ -7,8 +7,8 @@ parameters:
   - name: ng-projects
     displayName: Angular Projects
     type: string
-      - "project-a"
-      - "project-b"
+      - project-a
+      - project-b
     
 trigger:
 - main
