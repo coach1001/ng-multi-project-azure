@@ -4,14 +4,22 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 parameters:
-- name: NgProjects
-  displayName: Angular Projects
-  default: ['project-a', 'project-b']
+- name: myNumber
+  type: number
+  default: 2
+  values:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
 
 trigger:
 - main
 
-steps:
-  - ${{ each project in parameters.NgProjects }}:
-    - bash
-      echo ${{ project }}
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+steps: 
+- ${{ each value in parameters.values }}:
+  - script: echo ${{ value }} 
