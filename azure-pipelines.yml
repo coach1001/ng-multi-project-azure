@@ -9,8 +9,14 @@ parameters:
   default:
     - project: 'project-a'
       build: true
+      test: true
+      publishTestResults: true
+      deployToOcto: true
     - project: 'project-b'
       build: true
+      test: false
+      publishTestResults: false
+      deployToOcto: true
 
 trigger:
 - main
