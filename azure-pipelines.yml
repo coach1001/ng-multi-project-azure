@@ -40,6 +40,9 @@ steps:
     ${{ each value in parameters.ngProjects }}:
       ${{ format('NG_PROJECT_{0}', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
+- script: |
+    npm install -g @angular/cli
+  displayName: 'Install Angular CLI'
 - task: Npm@1
   inputs:
     command: 'install'
