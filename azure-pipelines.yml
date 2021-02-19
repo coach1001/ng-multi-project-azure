@@ -47,12 +47,25 @@ steps:
   displayName: Install Node Dependencies
   inputs:
     arguments: 'install'
+- task: UseGitVersion@5
+  displayName: Git Version (SemVer)
+  inputs:
+    versionSpec: '5.x'
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
 - ${{ each value in parameters.ngProjects }}:
+  - task: Yarn@3
+    displayName: 'Version Project - ${{ value.project }}'
+    inputs:
+      projectDirectory: 'projects/${{ value.project }}'
+      arguments: version --new-version $(GitVersion.SemVer) 
   - script: |
       ng build ${{ value.project }} --prod
     displayName: 'Building Project - ${{ value.project }}'
+    enabled: false
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }})
   - script: | 
       ng test ${{ value.project }} --browsers=ChromeHeadless --code-coverage --progress=false --watch=false 
     displayName: 'Test Project - ${{ value.project }}'
+    enabled: false
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
