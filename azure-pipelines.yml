@@ -70,7 +70,7 @@ steps:
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
   - task: OctopusPack@4
     inputs:
-      packageId: 'Application.${{ value.project }}'
+      packageId: 'Project.${{ value.project }}'
       packageFormat: 'NuPkg'
       packageVersion: '$(GitVersion.NuGetVersion)'
       sourcePath: 'dist/${{ value.project }}'
