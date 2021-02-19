@@ -50,7 +50,7 @@ steps:
   - task: Npm@1
     inputs:
       command: 'custom'
-      workingDir: 'project/$(value.project)'
+      workingDir: 'projects/${{ value.project }}'
       customCommand: 'version --new-version  $(GitVersion.SemVer)'
     displayName: 'Git Version (SemVer) Project - ${{ value.project }}'
   - script: |
