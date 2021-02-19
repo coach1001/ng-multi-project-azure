@@ -10,7 +10,7 @@ parameters:
     - project: 'project-a'
       build: true
       test: true
-      publishTestResults: true
+      publishTestResults: false
       deployToOcto: true
     - project: 'project-b'
       build: true
@@ -68,3 +68,13 @@ steps:
       ng test ${{ value.project }} --browsers=ChromeHeadless --code-coverage --progress=false --watch=false 
     displayName: 'Test Project - ${{ value.project }}'
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
+  - task: OctopusPack@4
+    inputs:
+      packageId: 'Application.${{ value.project }}'
+      packageFormat: 'NuPkg'
+      packageVersion: '$(GitVersion.NuGetVersion)'
+      sourcePath: 'dist/${{ value.project }}'
+      outputPath: '$(Build.ArtifactStagingDirectory)'
+      nuGetAuthor: 'Francois Weber'
+      nuGetTitle: 'Octo Package - ${{ value.project }} $(GitVersion.NuGetVersion)'
+    displayName: 'Octo Package Project - ${{ value.project }}'
