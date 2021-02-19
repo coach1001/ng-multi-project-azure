@@ -78,3 +78,10 @@ steps:
       nuGetAuthor: 'Francois Weber'
       nuGetTitle: 'Octo Package - ${{ value.project }} $(GitVersion.NuGetVersion)'
     displayName: 'Octo Package Project - ${{ value.project }}'
+  - task: NuGetCommand@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'Nuget Package Manager'
+    displayName: 'Push packages to Nuget'      
