@@ -17,6 +17,7 @@ parameters:
       build: true
       test: true
       publishTestResults: false
+      package: true
       pushPackage: true
 
 trigger:
@@ -87,4 +88,4 @@ steps:
       nuGetFeedType: 'external'
       publishFeedCredentials: 'Nuget Package Manager'
     displayName: 'Push packages to Nuget'
-    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.pushPackage }})      
+    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.pushPackage }})
