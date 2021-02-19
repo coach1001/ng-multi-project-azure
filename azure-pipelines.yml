@@ -8,12 +8,12 @@ parameters:
   type: object
   default:
     - project: 'project-a'
-      build: true
-      test: true
+      build: false
+      test: false
       publishTestResults: true
       deployToOcto: true
     - project: 'project-b'
-      build: true
+      build: false
       test: false
       publishTestResults: false
       deployToOcto: true
@@ -29,10 +29,6 @@ steps:
   displayName: 'Install NodeJS'
   inputs:
     versionSpec: '14.15.5'
-- task: YarnInstaller@3
-  displayName: 'Install Yarn'
-  inputs:
-    versionSpec: '1.x'
 - script: |
     node build-script.js
   displayName: 'Check Commit Message for Project Filter'
@@ -40,13 +36,10 @@ steps:
     ${{ each value in parameters.ngProjects }}:
       ${{ format('NG_PROJECT_{0}', upper(value.project)) }}: ${{ value.project }}
     BUILD_COMMIT_MESSAGE: $(Build.SourceVersionMessage)
-- script: |
-    npm install -g @angular/cli
-  displayName: 'Install Angular CLI'
-- task: Yarn@3
-  displayName: Install Node Dependencies
+- task: Npm@1
   inputs:
-    arguments: 'install'
+    command: 'install'
+  displayName: 'Install Project Dependencies'
 - task: UseGitVersion@5
   displayName: Git Version (SemVer)
   inputs:
@@ -54,11 +47,12 @@ steps:
     useConfigFile: true
     configFilePath: 'GitVersion.yml'
 - ${{ each value in parameters.ngProjects }}:
-  - task: Yarn@3
-    displayName: 'Version Project - ${{ value.project }}'
+  - task: Npm@1
     inputs:
-      projectDirectory: 'projects/${{ value.project }}'
-      arguments: version --new-version $(GitVersion.SemVer) 
+      command: 'custom'
+      workingDir: 'project/$(value.project)'
+      customCommand: 'version --new-version  $(GitVersion.SemVer)'
+    displayName: 'Git Version (SemVer) Project - ${{ value.project }}'
   - script: |
       ng build ${{ value.project }} --prod
     displayName: 'Building Project - ${{ value.project }}'
