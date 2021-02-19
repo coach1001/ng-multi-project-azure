@@ -8,13 +8,13 @@ parameters:
   type: object
   default:
     - project: 'project-a'
-      build: false
-      test: false
+      build: true
+      test: true
       publishTestResults: true
       deployToOcto: true
     - project: 'project-b'
-      build: false
-      test: false
+      build: true
+      test: true
       publishTestResults: false
       deployToOcto: true
 
@@ -55,7 +55,7 @@ steps:
     inputs:
       command: 'custom'
       workingDir: 'projects/${{ value.project }}'
-      customCommand: 'version --new-version  $(GitVersion.SemVer)'
+      customCommand: 'version --new-version --allow-same-version $(GitVersion.SemVer)'
     displayName: 'Git Version (SemVer) Project - ${{ value.project }}'
   - script: |
       ng build ${{ value.project }} --prod
