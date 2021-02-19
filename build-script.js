@@ -7,7 +7,6 @@ Object.keys(process.env).forEach(k => {
     pipelineNgProjects.push(process.env[k]);
   }
 });
-let runProjects = commitMessage.split('##');
 let temp = commitMessage.split('##');
 if(temp.length > 1) {
   temp = temp[1].split(',').map(v => v.trim());
