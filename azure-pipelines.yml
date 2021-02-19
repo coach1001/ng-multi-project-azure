@@ -48,12 +48,11 @@ steps:
   inputs:
     arguments: 'install'
 - ${{ each value in parameters.ngProjects }}:
-  - ${{ if contains(variables.NG_PROJECTS, '${{ value.project }}') }}:
-    - script: |
-        ng build ${{ value.project }} --prod
-      displayName: 'Building Project - ${{ value.project }}'
-      condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }})
-    - script: | 
-        ng test ${{ value.project }} --browsers=ChromeHeadless --code-coverage --progress=false --watch=false 
-      displayName: 'Test Project - ${{ value.project }}'
-      condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
+  - script: |
+      ng build ${{ value.project }} --prod
+    displayName: 'Building Project - ${{ value.project }}'
+    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }})
+  - script: | 
+      ng test ${{ value.project }} --browsers=ChromeHeadless --code-coverage --progress=false --watch=false 
+    displayName: 'Test Project - ${{ value.project }}'
+    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
