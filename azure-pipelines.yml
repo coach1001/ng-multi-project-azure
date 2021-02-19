@@ -30,6 +30,10 @@ steps:
   inputs:
     versionSpec: '14.15.5'
 - script: |
+    git config user.email 'coach1001@gmail.com' 
+    git config user.name 'Francois Weber'
+  displayName: 'Set Git Identity'  
+- script: |
     node build-script.js
   displayName: 'Check Commit Message for Project Filter'
   env:
