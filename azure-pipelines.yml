@@ -11,12 +11,13 @@ parameters:
       build: true
       test: true
       publishTestResults: false
-      deployToOcto: true
+      package: true
+      pushPackage: true      
     - project: 'project-b'
       build: true
       test: true
       publishTestResults: false
-      deployToOcto: true
+      pushPackage: true
 
 trigger:
 - main
@@ -78,10 +79,12 @@ steps:
       nuGetAuthor: 'Francois Weber'
       nuGetTitle: 'Octo Package - ${{ value.project }} $(GitVersion.NuGetVersion)'
     displayName: 'Octo Package Project - ${{ value.project }}'
+    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.package }})
   - task: NuGetCommand@2
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
       nuGetFeedType: 'external'
       publishFeedCredentials: 'Nuget Package Manager'
-    displayName: 'Push packages to Nuget'      
+    displayName: 'Push packages to Nuget'
+    condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.pushPackage }})      
