@@ -60,10 +60,8 @@ steps:
   - script: |
       ng build ${{ value.project }} --prod
     displayName: 'Building Project - ${{ value.project }}'
-    enabled: false
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }})
   - script: | 
       ng test ${{ value.project }} --browsers=ChromeHeadless --code-coverage --progress=false --watch=false 
     displayName: 'Test Project - ${{ value.project }}'
-    enabled: false
     condition: and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.test }})
