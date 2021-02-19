@@ -48,7 +48,7 @@ steps:
   inputs:
     arguments: 'install'
 - ${{ each value in parameters.ngProjects }}:
-  - ${{ if and(contains(variables.NG_PROJECTS, '${{ value.project }}'), ${{ value.build }}) }}:
+  - ${{ if contains(variables.NG_PROJECTS, '${{ value.project }}') }}:
     - script: |
         ng build ${{ value.project }} --prod
       displayName: 'Building Project - ${{ value.project }}'
