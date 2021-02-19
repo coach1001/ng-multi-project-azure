@@ -81,7 +81,7 @@ steps:
   - task: NuGetCommand@2
     inputs:
       command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
       nuGetFeedType: 'external'
       publishFeedCredentials: 'Nuget Package Manager'
     displayName: 'Push packages to Nuget'      
